@@ -1,0 +1,14 @@
+{
+  "name": "donneesconnectees",
+  "version": "1.0.0",
+  "description": "Projet individuel de Web API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thach Thao LE",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
