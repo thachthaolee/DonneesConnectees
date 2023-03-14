@@ -3,22 +3,135 @@
     <head>
         <meta charset="UTF-8" />
         <title>Client</title>
+		<script>
+			function envoi(){
+				var body = {"URI":document.getElementById('IdURI').value,
+							"Annotation":document.getElementById('IdAnnotation').value};
+				
+				var route = "/annotation";
+				fetch(route,{method:'POST',
+							headers:{'Content-Type': 'application/json'},
+							body: JSON.stringify(body)
+						}).then(
+							function(res){
+								window.location.reload();
+							}
+						);
+			}
 
+			function envoiAnnot(){
+				var Annot = document.getElementById('IdAnnot').value;
+				var FormatIdAnnot = document.getElementById('FormatIdAnnot').value;
+
+				if (FormatIdAnnot == 'json'){
+					FormatIdAnnot = 'application/'+FormatIdAnnot;
+				}
+				else{
+					FormatIdAnnot = 'text/'+FormatIdAnnot;
+				}
+
+				var route = '/IdAnnot/'+Annot;
+				console.log(route);
+				fetch(route, {method:'GET',
+								headers : {'accept' : FormatIdAnnot}});
+			};
+
+			function envoiURI(){
+				var AnnotURI = document.getElementById('AnnotURI').value;
+				console.log(AnnotURI);
+				//AnnotURI = AnnotURI.split('/').slice(2).join('/');
+				
+				var FormatAnnotURI =document.getElementById('FormatAnnotURI').value;
+
+				if (FormatIdAnnot == 'json'){
+					FormatIdAnnot = 'application/'+FormatAnnotURI;
+				}
+				else{
+					FormatIdAnnot = 'text/'+FormatAnnotURI;
+				}
+
+				var route = '/URI/'+AnnotURI;
+				console.log(route);
+				fetch(route, {method : 'GET',
+								headers : {'accept' : FormatAnnotURI},
+								mode : 'cors'});
+
+			};
+
+
+		</script>
     </head>
 
     <body>
+		<h1>Ecrire une annotation</h1>
         <form autocomplete="off">
 			<p>
 				<label for="URI">URI :</label>
 				<input type="text" name="URI" id="IdURI" placeholder="" size="30" maxlength="20">
 			</p>
 			<p>
-				<label for="Commentaire">Ajoutez commentaire</label><br>
-				<textarea name="Commentaire" id="IdCommentaire" size="30"></textarea>
+				<label for="Annotation">Ajoutez annotation</label><br>
+				<textarea name="Annotation" id="IdAnnotation" size="30"></textarea>
 			</p>
 			<p> 
 				<button onclick="envoi()" type="button">Envoyer</button>
 			</p>
 		</form>
+		
+		<p id="IdRes"></p>
+
+		<h1>Acceder à une annotation</h1>
+		<form autocomplete="off">
+			<p>
+				<label for="Annot">Numéro de l'annotation :</label>
+				<input type="text" name="Annot" id="IdAnnot" placeholder="" size="30" maxlength="20">
+			</p>
+			<p>
+				<label for="FormatIdAnnot">Choisissez le format de réponse</label><br>
+				<select name="FormatIdAnnot" id="FormatIdAnnot">
+					<option value="html">html</option>
+					<option value="json">Json</option>
+				</select>
+			</p>
+			<p> 
+				<button onclick="envoiAnnot()" type="button">Envoyer</button> 
+			</p>
+		</form>
+
+		<h1>Acceder aux annotations d'une URI</h1>
+		<form autocomplete="off">
+			<p>
+				<label for="AnnotURI">URI :</label>
+				<input type="text" name="AnnotURI" id="AnnotURI" placeholder="" size="30">
+			</p>
+			
+			<p>
+				<label for="FormatAnnotURI">Choisissez le format de réponse</label><br>
+				<select name="FormatAnnotURI" id="FormatAnnotURI">
+					<option value="html">html</option>
+					<option value="json">Json</option>
+				</select>
+			</p>
+			<p> 
+				<button onclick="envoiURI()" type="button">Envoyer</button>   
+			</p>
+		</form>
+
+
+		<h1>Acceder à toutes les annotations</h1>
+		<form autocomplete="off">
+			<p>
+				<label for="FormatAllAnnot">Choisissez le format de réponse</label><br>
+				<select name="FormatAllAnnot" id="FormatAllAnnot">
+					<option value="html">html</option>
+					<option value="json">Json</option>
+				</select>
+			</p>
+			<p> 
+				<button onclick="envoiAllAnnot()" type="button">Envoyer</button>  
+			</p>
+		</form>
+
+		
     </body>
 </html>
