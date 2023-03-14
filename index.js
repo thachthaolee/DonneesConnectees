@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 
 app.get('/', (request, response) => {
     // The string we want to display on http://localhost:3000
-    response.send('Welcome on the annotations API! Take a breath and start using it!');
+    response.send('Welcome on the annotations API! Hello Wold ! ');
 });
 
 app.listen(PORT, () =>{
