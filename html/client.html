@@ -35,7 +35,7 @@
 				fetch(route, {method:'GET',
 								headers : {'accept' : FormatIdAnnot}});
 			};
-
+			/*
 			function envoiURI(){
 				var AnnotURI = document.getElementById('AnnotURI').value;
 				console.log(AnnotURI);
@@ -57,7 +57,7 @@
 								mode : 'cors'});
 
 			};
-			/*
+			
 			function envoiAllAnnot(){
 				var FormatAllAnnot = document.getElementById('FormatAllAnnot').value;
 
@@ -113,7 +113,7 @@
 		</form>
 
 		<h1>Acceder aux annotations d'une URI</h1>
-		<form autocomplete="off">
+		<form autocomplete="off" action="/AnnotURI" method="GET">
 			<p>
 				<label for="AnnotURI">URI :</label>
 				<input type="text" name="AnnotURI" id="AnnotURI" placeholder="" size="30">
@@ -127,13 +127,13 @@
 				</select>
 			</p>
 			<p> 
-				<button onclick="envoiURI()" type="button">Envoyer</button>   
+				<input type="submit" value="Evoyer">     
 			</p>
 		</form>
 
 
 		<h1>Acceder à toutes les annotations</h1>
-		<form autocomplete="off" action="/AllAnnot" method="get">
+		<form autocomplete="off" action="/AllAnnot" method="GET">
 			<p>
 				<label for="FormatAllAnnot">Choisissez le format de réponse</label><br>
 				<select name="FormatAllAnnot" id="FormatAllAnnot">
@@ -142,7 +142,7 @@
 				</select>
 			</p>
 			<p> 
-				<button type="button">Envoyer</button>  
+				<input type="submit" value="Evoyer">  
 			</p>
 		</form>
 

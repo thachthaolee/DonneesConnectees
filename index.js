@@ -55,38 +55,63 @@ app.get('/IdAnnot/:Annot', (req,res) => {
   });
 });
 
-app.get('/URI/:AnnotURI', (req, res) => {
-  var IdURI = req.params.AnnotURI;
-  console.log(IdURI);
 
-  var tabRep = [];
+app.get('/AnnotURI', (req,res) => {
+  var format = req.query.formatAnnotURI;
+  var idURI = req.query.AnnotURI;
 
-  for ( key in data){
-    if (data[key]['URI']==IdURI){
-      tabRep.push({'IdAnnotation' : data[key], 'Annotation' : data[key]['Annotation']});
+  var tabRep =[];
 
+  for (key in data) {
+    if (data[key]['URI'] == idURI){
+      tabRep.push({"Identifiant" : key, "Annotation" : data[key]['Annotation'] });
     }
   }
-  res.format ({
-    'text/html': function() {
-      res.setHeader('Content-Type', 'text/html');
-      res.send("<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'/><title>Titre</title></head><body><div>"+JSON.stringify(tabRep)+
-          "</div></body></html>"); 
-     },
 
-     'application/json': function() {
-      res.send(tabRep); 
-    }
-  });
+  if (format=="html"){
+		req.headers['accept']= 'text/html';
+	}
+	else {
+		if (format=="Json"){
+			req.headers['accept']=  'application/json';
+		}	
+	}
+		
+	res.format ({
+		   'text/html': function() {
+				res.send(tabRep); 
+		   },
+
+		   'application/json': function() {
+				res.send(tabRep);
+			}
+	});
 });
 
 app.get('/AllAnnot', (req,res) => {
-  var format = req.query.format;
+  var format = req.query.FormatAllAnnot;
   var AllAnnot = data;
 
-  if (format ==='json'){
-    res.send(AllAnnot);
-  }
+  if (format=="html"){
+		req.headers['accept']= 'text/html';
+	}
+	else {
+		if (format=="Json"){
+			req.headers['accept']=  'application/json';
+		}	
+	}
+		
+	res.format ({
+		   'text/html': function() {
+				console.log("Document HTML");
+				res.send(AllAnnot); 
+		   },
+
+		   'application/json': function() {
+				console.log("Document JSON");
+				res.send(AllAnnot);
+			}
+	});
 });
 
 app.listen(PORT, () =>{
