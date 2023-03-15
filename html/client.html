@@ -18,7 +18,7 @@
 							}
 						);
 			}
-
+			/*
 			function envoiAnnot(){
 				var Annot = document.getElementById('IdAnnot').value;
 				var FormatIdAnnot = document.getElementById('FormatIdAnnot').value;
@@ -35,7 +35,7 @@
 				fetch(route, {method:'GET',
 								headers : {'accept' : FormatIdAnnot}});
 			};
-			/*
+			
 			function envoiURI(){
 				var AnnotURI = document.getElementById('AnnotURI').value;
 				console.log(AnnotURI);
@@ -95,7 +95,7 @@
 		<p id="IdRes"></p>
 
 		<h1>Acceder à une annotation</h1>
-		<form autocomplete="off">
+		<form autocomplete="off" action="/IdAnnot" method="GET">
 			<p>
 				<label for="Annot">Identifiant de l'annotation :</label>
 				<input type="text" name="Annot" id="IdAnnot" placeholder="" size="30" maxlength="20">
@@ -108,7 +108,8 @@
 				</select>
 			</p>
 			<p> 
-				<button onclick="envoiAnnot()" type="button">Envoyer</button> 
+				<!--<button onclick="envoiAnnot()" type="button">Envoyer</button>-->
+				<input type="submit" value="Evoyer">
 			</p>
 		</form>
 

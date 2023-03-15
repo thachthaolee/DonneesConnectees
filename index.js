@@ -26,6 +26,7 @@ app.post('/annotation', (request, response) => {
   response.send("votre annotation a été sauvegardé !");
 });
 
+/*
 app.get('/IdAnnot/:Annot', (req,res) => {
   var IdAnnot = req.params.Annot;
 
@@ -54,6 +55,42 @@ app.get('/IdAnnot/:Annot', (req,res) => {
    }
   });
 });
+*/
+
+app.get('/IdAnnot', (req,res) => {
+  var IdAnnot = req.query.Annot;
+  var format = req.query.FormatIdAnnot;
+  
+  var Exist = Object.keys(data).includes(IdAnnot);
+  
+  if (format=="html"){
+    req.headers['accept']= 'text/html';
+  }
+  else if (format=="Json"){
+    req.headers['accept']=  'application/json';
+  }	
+
+  res.format ({
+    'text/html': function() {
+      if (Exist) {
+        res.send("<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'/><title>Titre</title></head><body><div>"+JSON.stringify(data[IdAnnot])+
+        "</div></body></html>");
+      }
+      else{
+        res.send("aucune annotation n'est associée à cette clé");
+      }
+    },
+
+    'application/json': function() {
+      if (Exist) {
+        res.send(data[IdAnnot]);
+      }
+      else{
+        res.send("aucune annotation n'est associée à cette clé");
+      }
+    }
+  });
+});
 
 
 app.get('/AnnotURI', (req,res) => {
@@ -71,15 +108,15 @@ app.get('/AnnotURI', (req,res) => {
   if (format=="html"){
 		req.headers['accept']= 'text/html';
 	}
-	else {
-		if (format=="Json"){
-			req.headers['accept']=  'application/json';
-		}	
+	else if (format=="Json"){
+		req.headers['accept']=  'application/json';
 	}
 		
 	res.format ({
 		   'text/html': function() {
-				res.send(tabRep); 
+				res.send("<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'/><title>Titre</title></head><body><div>"+
+        JSON.stringify(tabRep)+
+        "</div></body></html>"); 
 		   },
 
 		   'application/json': function() {
@@ -95,16 +132,16 @@ app.get('/AllAnnot', (req,res) => {
   if (format=="html"){
 		req.headers['accept']= 'text/html';
 	}
-	else {
-		if (format=="Json"){
-			req.headers['accept']=  'application/json';
-		}	
+	else if (format=="Json"){
+		req.headers['accept']=  'application/json';
 	}
 		
 	res.format ({
 		   'text/html': function() {
 				console.log("Document HTML");
-				res.send(AllAnnot); 
+				res.send("<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'/><title>Titre</title></head><body><div>"+
+        JSON.stringify(AllAnnot)+
+        "</div></body></html>"); 
 		   },
 
 		   'application/json': function() {
