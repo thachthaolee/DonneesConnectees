@@ -58,7 +58,20 @@
 
 			};
 
+			function envoiAllAnnot(){
+				var FormatAllAnnot = document.getElementById('FormatAllAnnot').value;
 
+				if (FormatIdAnnot == 'json'){
+					FormatIdAnnot = 'application/'+FormatAllAnnot;
+				}
+				else{
+					FormatIdAnnot = 'text/'+FormatAllAnnot;
+				}
+				
+				var route = '/AllAnnot';
+				fetch(route, {method : 'GET',
+								headers : {'accept' : FormatAllAnnot}});
+			};
 		</script>
     </head>
 
@@ -83,7 +96,7 @@
 		<h1>Acceder à une annotation</h1>
 		<form autocomplete="off">
 			<p>
-				<label for="Annot">Numéro de l'annotation :</label>
+				<label for="Annot">Identifiant de l'annotation :</label>
 				<input type="text" name="Annot" id="IdAnnot" placeholder="" size="30" maxlength="20">
 			</p>
 			<p>

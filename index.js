@@ -80,6 +80,20 @@ app.get('/URI/:AnnotURI', (req, res) => {
   });
 });
 
+app.get('/AllAnnot', (req,res) => {
+  res.format({
+    'text/html': function() {
+      res.setHeader('Content-Type', 'text/html');
+      res.send("<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'/><title>Titre</title></head><body><div>"+JSON.stringify(data)+
+          "</div></body></html>"); 
+     },
+
+     'application/json': function() {
+      res.send(data); 
+    }
+  });
+});
+
 app.listen(PORT, () =>{
   console.log(`The Annotations API is running on: http://localhost:${PORT}.`);
 });
