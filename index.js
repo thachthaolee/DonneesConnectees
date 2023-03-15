@@ -81,17 +81,12 @@ app.get('/URI/:AnnotURI', (req, res) => {
 });
 
 app.get('/AllAnnot', (req,res) => {
-  res.format({
-    'text/html': function() {
-      res.setHeader('Content-Type', 'text/html');
-      res.send("<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'/><title>Titre</title></head><body><div>"+JSON.stringify(data)+
-          "</div></body></html>"); 
-     },
+  var format = req.query.format;
+  var AllAnnot = data;
 
-     'application/json': function() {
-      res.send(data); 
-    }
-  });
+  if (format ==='json'){
+    res.send(AllAnnot);
+  }
 });
 
 app.listen(PORT, () =>{

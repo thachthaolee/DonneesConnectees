@@ -57,7 +57,7 @@
 								mode : 'cors'});
 
 			};
-
+			/*
 			function envoiAllAnnot(){
 				var FormatAllAnnot = document.getElementById('FormatAllAnnot').value;
 
@@ -72,6 +72,7 @@
 				fetch(route, {method : 'GET',
 								headers : {'accept' : FormatAllAnnot}});
 			};
+			*/
 		</script>
     </head>
 
@@ -132,7 +133,7 @@
 
 
 		<h1>Acceder à toutes les annotations</h1>
-		<form autocomplete="off">
+		<form autocomplete="off" action="/AllAnnot" method="get">
 			<p>
 				<label for="FormatAllAnnot">Choisissez le format de réponse</label><br>
 				<select name="FormatAllAnnot" id="FormatAllAnnot">
@@ -141,7 +142,7 @@
 				</select>
 			</p>
 			<p> 
-				<button onclick="envoiAllAnnot()" type="button">Envoyer</button>  
+				<button type="button">Envoyer</button>  
 			</p>
 		</form>
 
